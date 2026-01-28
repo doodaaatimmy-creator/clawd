@@ -1,0 +1,28 @@
+# molt-dash development progress (Ralph pattern)
+
+## Session 1 - 2026-01-28
+
+### What was built
+- molt-dash CLI tool that shows:
+  - Gateway status (running/pid/port)
+  - Discord connection health
+  - Session list with token usage bars
+  - Summary statistics
+
+### Learnings
+- moltbot sessions --json provides structured session data
+- moltbot gateway status shows service state
+- moltbot health shows channel connectivity
+- Token data includes totalTokens and contextTokens fields
+
+### Ralph Pattern Observations
+- Starting fresh with minimal context worked well
+- The "atomic task" approach forced clear scope definition
+- No PRD needed for this small tool - direct implementation
+- progress.txt serves as session memory for future iterations
+
+### Next possible iterations
+- Add cost estimation (tokens → approximate $ based on model)
+- Add historical tracking (store snapshots)
+- Add --watch mode for live updates
+- Color-code sessions by type (main/subagent/discord)

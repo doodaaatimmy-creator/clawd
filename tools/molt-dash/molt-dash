@@ -1,0 +1,144 @@
+#!/usr/bin/env node
+/**
+ * molt-dash - Quick Moltbot status dashboard
+ * 
+ * A small CLI tool that shows Moltbot status at a glance.
+ * Built using the Ralph pattern: atomic, focused, fresh context.
+ */
+
+const { execSync } = require('child_process');
+
+// ANSI colors
+const colors = {
+  reset: '\x1b[0m',
+  bold: '\x1b[1m',
+  dim: '\x1b[2m',
+  green: '\x1b[32m',
+  yellow: '\x1b[33m',
+  blue: '\x1b[34m',
+  magenta: '\x1b[35m',
+  cyan: '\x1b[36m',
+  red: '\x1b[31m',
+  gray: '\x1b[90m',
+};
+
+const c = (color, text) => `${colors[color]}${text}${colors.reset}`;
+
+function run(cmd) {
+  try {
+    return execSync(cmd, { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] });
+  } catch (e) {
+    return e.stdout || '';
+  }
+}
+
+function formatAge(ms) {
+  const sec = Math.floor(ms / 1000);
+  if (sec < 60) return `${sec}s`;
+  const min = Math.floor(sec / 60);
+  if (min < 60) return `${min}m`;
+  const hr = Math.floor(min / 60);
+  if (hr < 24) return `${hr}h ${min % 60}m`;
+  const days = Math.floor(hr / 24);
+  return `${days}d ${hr % 24}h`;
+}
+
+function formatTokens(used, max) {
+  const pct = max > 0 ? ((used / max) * 100).toFixed(0) : 0;
+  const bar = '█'.repeat(Math.floor(pct / 10)) + '░'.repeat(10 - Math.floor(pct / 10));
+  const color = pct > 80 ? 'red' : pct > 50 ? 'yellow' : 'green';
+  return `${c(color, bar)} ${pct}%`;
+}
+
+function getGatewayStatus() {
+  const out = run('moltbot gateway status 2>&1');
+  const running = out.includes('Runtime: running');
+  const pidMatch = out.match(/pid (\d+)/);
+  const portMatch = out.match(/port=(\d+)/);
+  return {
+    running,
+    pid: pidMatch ? pidMatch[1] : null,
+    port: portMatch ? portMatch[1] : '18789',
+  };
+}
+
+function getSessions() {
+  try {
+    const out = run('moltbot sessions --json 2>&1');
+    return JSON.parse(out);
+  } catch {
+    return { sessions: [] };
+  }
+}
+
+function getHealth() {
+  const out = run('moltbot health 2>&1');
+  const discordOk = out.includes('Discord: ok');
+  return { discordOk };
+}
+
+// Main dashboard
+console.log();
+console.log(c('bold', c('magenta', '🦞 MOLT-DASH')) + c('dim', ' — Moltbot at a glance'));
+console.log(c('dim', '─'.repeat(50)));
+
+// Gateway status
+const gw = getGatewayStatus();
+console.log();
+console.log(c('bold', 'Gateway'));
+if (gw.running) {
+  console.log(`  ${c('green', '●')} Running (pid ${gw.pid}, port ${gw.port})`);
+} else {
+  console.log(`  ${c('red', '●')} Not running`);
+}
+
+// Health
+const health = getHealth();
+console.log();
+console.log(c('bold', 'Channels'));
+console.log(`  Discord: ${health.discordOk ? c('green', '✓ connected') : c('red', '✗ disconnected')}`);
+
+// Sessions
+const sessData = getSessions();
+const sessions = sessData.sessions || [];
+console.log();
+console.log(c('bold', 'Sessions') + c('dim', ` (${sessions.length} active)`));
+
+if (sessions.length === 0) {
+  console.log(c('dim', '  No active sessions'));
+} else {
+  // Sort by most recent
+  sessions.sort((a, b) => a.ageMs - b.ageMs);
+  
+  for (const s of sessions.slice(0, 6)) {
+    const key = s.key.replace('agent:main:', '');
+    const shortKey = key.length > 30 ? key.slice(0, 27) + '...' : key.padEnd(30);
+    const tokens = s.totalTokens || 0;
+    const maxTokens = s.contextTokens || 200000;
+    const age = formatAge(s.ageMs);
+    
+    const tokenDisplay = tokens > 0 ? formatTokens(tokens, maxTokens) : c('dim', '░░░░░░░░░░ --');
+    const kindIcon = s.kind === 'direct' ? '👤' : '👥';
+    
+    console.log(`  ${kindIcon} ${c('cyan', shortKey)} ${c('dim', age.padStart(6))} ${tokenDisplay}`);
+  }
+  
+  if (sessions.length > 6) {
+    console.log(c('dim', `  ... and ${sessions.length - 6} more`));
+  }
+}
+
+// Summary stats
+const totalTokens = sessions.reduce((sum, s) => sum + (s.totalTokens || 0), 0);
+const directSessions = sessions.filter(s => s.kind === 'direct').length;
+const groupSessions = sessions.filter(s => s.kind === 'group').length;
+
+console.log();
+console.log(c('bold', 'Summary'));
+console.log(`  Total tokens used: ${c('yellow', totalTokens.toLocaleString())}`);
+console.log(`  Direct sessions: ${directSessions} | Group sessions: ${groupSessions}`);
+
+console.log();
+console.log(c('dim', '─'.repeat(50)));
+console.log(c('dim', 'Run moltbot status for full details'));
+console.log();
