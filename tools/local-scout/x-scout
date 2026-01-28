@@ -1,0 +1,147 @@
+#!/bin/bash
+# x-scout: Local LLM-powered X/social feed analyzer
+# Reduces token usage by doing grunt work locally
+
+set -e
+
+MODEL="${SCOUT_MODEL:-llama3.2}"
+TOPICS="${SCOUT_TOPICS:-AI, agents, trading, tools, crypto, startups}"
+
+usage() {
+    cat <<EOF
+x-scout - Local LLM feed analyzer
+
+USAGE:
+    x-scout <command> [options]
+
+COMMANDS:
+    digest <file>     Analyze saved feed, return top signals
+    filter <file>     Filter posts by relevance (returns JSON)
+    summarize <file>  Summarize a single post or article
+    research <query>  Research a topic using local model
+    help              Show this help
+
+ENVIRONMENT:
+    SCOUT_MODEL       Ollama model to use (default: llama3.2)
+    SCOUT_TOPICS      Topics to filter for (default: AI, agents, trading, tools, crypto, startups)
+
+EXAMPLES:
+    # Analyze a saved X timeline
+    x-scout digest timeline.txt
+
+    # Filter for relevant posts only
+    x-scout filter timeline.txt | jq '.relevant[]'
+
+    # Quick research
+    x-scout research "CrewAI vs LangGraph for local agents"
+EOF
+}
+
+digest() {
+    local file="$1"
+    if [[ ! -f "$file" ]]; then
+        echo "Error: File not found: $file" >&2
+        exit 1
+    fi
+    
+    # Use --nowordwrap for cleaner output
+    cat "$file" | ollama run --nowordwrap "$MODEL" "You are a signal analyst. Review this social media feed and extract the TOP 5 most valuable signals for someone interested in: $TOPICS.
+
+For each signal, provide:
+- AUTHOR: @handle
+- SIGNAL: One-line summary of what's valuable
+- WHY: Why it matters (one sentence)
+- ACTION: Repost/Like/Ignore/Research
+
+Be extremely selective. Quality over quantity. Skip noise, hype, and generic content.
+
+Output format:
+---
+1. AUTHOR: @example
+   SIGNAL: They launched X which does Y
+   WHY: First mover in Z space
+   ACTION: Repost
+---
+
+Feed content:"
+}
+
+filter() {
+    local file="$1"
+    if [[ ! -f "$file" ]]; then
+        echo "Error: File not found: $file" >&2
+        exit 1
+    fi
+    
+    cat "$file" | ollama run --nowordwrap "$MODEL" "You are a content filter. Review these posts and return ONLY the ones relevant to: $TOPICS.
+
+Return valid JSON:
+{
+  \"relevant\": [
+    {\"author\": \"@handle\", \"summary\": \"brief summary\", \"score\": 1-10}
+  ],
+  \"filtered_out\": 5
+}
+
+Be strict. Score 7+ means genuinely useful signal. Skip hype and noise.
+
+Posts:"
+}
+
+summarize() {
+    local file="$1"
+    if [[ ! -f "$file" ]]; then
+        echo "Error: File not found: $file" >&2
+        exit 1
+    fi
+    
+    cat "$file" | ollama run --nowordwrap "$MODEL" "Summarize this content in 2-3 bullet points. Focus on:
+- What is it?
+- Why does it matter?
+- Key technical details (if any)
+
+Be concise. No fluff."
+}
+
+research() {
+    local query="$1"
+    if [[ -z "$query" ]]; then
+        echo "Error: Query required" >&2
+        exit 1
+    fi
+    
+    ollama run --nowordwrap "$MODEL" "You are a technical researcher. Provide a brief analysis of: $query
+
+Structure:
+1. OVERVIEW (2 sentences)
+2. KEY POINTS (3-5 bullets)
+3. PROS/CONS (if applicable)
+4. VERDICT (1 sentence recommendation)
+
+Be direct. No hedging. Give your actual assessment."
+}
+
+# Main
+case "${1:-help}" in
+    digest)
+        digest "$2"
+        ;;
+    filter)
+        filter "$2"
+        ;;
+    summarize)
+        summarize "$2"
+        ;;
+    research)
+        shift
+        research "$*"
+        ;;
+    help|--help|-h)
+        usage
+        ;;
+    *)
+        echo "Unknown command: $1" >&2
+        usage
+        exit 1
+        ;;
+esac
