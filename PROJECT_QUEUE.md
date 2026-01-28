@@ -51,7 +51,7 @@ Last updated: 2025-07-04
 
 | Task | Owner | Status | Blockers |
 |------|-------|--------|----------|
-| Set up clawd repo remote | Winn | 🟡 Pending | Needs GitHub repo setup |
+| Set up clawd repo remote | Winn | ✅ Done | Remote repo created at https://github.com/doodaaatimmy-creator/clawd |
 | Continue knowledge building | Chad | 🟢 Active | None - ongoing |
 
 **Next action:** Create remote repo and push clawd workspace
