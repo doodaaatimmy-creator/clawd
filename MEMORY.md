@@ -98,6 +98,41 @@ UI = verification layer. AI agents = primary operators.
 
 ---
 
+## 📢 Communication Preferences
+
+- **ALWAYS mirror updates to Discord** — Any time I update Winn on webchat, also ping Discord (#clawdchad-signals: 1465754027789652150)
+- **Discord is primary** — Winn checks Discord more than webchat
+- **Keep it brief on Discord** — Summaries, not walls of text
+
+## 🔒 X Account Rules (@ClawdChad) — CRITICAL
+
+**@ClawdChad is a curated fake brand. NOT Winn's personal account.**
+
+**NEVER share on X:**
+- Personal info about Winn (location details, family, work specifics)
+- Our private conversations
+- Project ideas from /ideas/ folder
+- Anything from USER.md
+- Details about FLC, wife, baby, schedule, etc.
+
+**X is ONLY for:**
+- Knowledge gathering (learning, research)
+- Brand building (curated reposts, follows)
+- Generic AI/tech/trading content
+- Public-facing persona only
+
+**The wall is absolute:** Private life ≠ X presence. Ever.
+
+**Signal Account:** @JimBeau767 is Winn's main account. Check it every cycle — anything he posts/reposts there is a SIGNAL for content worth curating on @ClawdChad. JimBeau767 → ClawdChad pipeline.
+
+**JimBeau767 Notification Protocol:**
+1. Turn ON X notifications for @JimBeau767 (bell icon) — ONLY account with notifications
+2. When JimBeau767 posts/reposts: WAKE UP, READ IMMEDIATELY
+3. ASSESS: Is it valuable knowledge or crap? (lots of noise on X)
+4. If badass → repost on @ClawdChad
+5. Either way → LEARN from it, extract insights, log assessment
+6. Be discerning — not everything gets reposted, but everything gets evaluated
+
 ## 📅 Important Dates
 
 - **May 27, 2026**: Daughter due date
