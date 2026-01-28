@@ -1,4 +1,18 @@
 [
-  {"id": "joe-001", "fact": "HR contact at Fort Lewis College", "category": "relationship", "timestamp": "2026-01-28", "source": "conversation", "status": "active"},
-  {"id": "joe-002", "fact": "Handles paternity leave arrangements", "category": "status", "timestamp": "2026-01-28", "source": "conversation", "status": "active"}
+  {
+    "id": "joe-hr-001",
+    "fact": "HR contact at Fort Lewis College",
+    "category": "relationship",
+    "timestamp": "2026-01-28",
+    "source": "conversation",
+    "status": "active"
+  },
+  {
+    "id": "joe-hr-002", 
+    "fact": "Responsible for paternity leave arrangements",
+    "category": "status",
+    "timestamp": "2026-01-28",
+    "source": "conversation", 
+    "status": "active"
+  }
 ]

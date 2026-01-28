@@ -1,6 +1,6 @@
 # Joe (HR)
 
-HR representative at Fort Lewis College responsible for managing paternity leave and employee documentation.
+HR contact at Fort Lewis College responsible for employee documentation and leave arrangements.
 
 ## Relationship
-Contact point for Winn's upcoming 12-week paternity leave in 2026.
+Handles paternity leave paperwork and administrative support for Winn.
