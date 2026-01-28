@@ -4,7 +4,7 @@
 
 set -e
 
-MODEL="${SCOUT_MODEL:-llama3.2}"
+MODEL="${SCOUT_MODEL:-qwen2.5-coder:14b}"
 TOPICS="${SCOUT_TOPICS:-AI, agents, trading, tools, crypto, startups}"
 
 usage() {

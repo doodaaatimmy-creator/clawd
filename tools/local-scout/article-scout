@@ -1,0 +1,145 @@
+#!/bin/bash
+# article-scout: Fetch and analyze popular X articles/threads
+# Uses local LLM for summarization to save Opus tokens
+
+set -e
+
+MODEL="${SCOUT_MODEL:-qwen2.5-coder:14b}"
+
+usage() {
+    cat <<EOF
+article-scout - Fetch and analyze X articles/threads
+
+USAGE:
+    article-scout <command> [options]
+
+COMMANDS:
+    fetch <url>       Fetch article content via web
+    analyze <file>    Analyze saved article with local LLM
+    digest <url>      Fetch + analyze in one step
+    thread <url>      Analyze X thread (multiple tweets)
+    help              Show this help
+
+ENVIRONMENT:
+    SCOUT_MODEL       Ollama model to use (default: qwen2.5-coder:14b)
+
+EXAMPLES:
+    # Analyze an article
+    article-scout digest "https://example.com/article"
+
+    # Analyze saved content
+    article-scout analyze article.txt
+
+    # Get thread summary
+    article-scout thread "https://x.com/user/status/123"
+EOF
+}
+
+fetch_url() {
+    local url="$1"
+    # Use curl + readability or just raw fetch
+    curl -sL "$url" | \
+        sed 's/<script[^>]*>.*<\/script>//g' | \
+        sed 's/<style[^>]*>.*<\/style>//g' | \
+        sed 's/<[^>]*>//g' | \
+        sed 's/&nbsp;/ /g' | \
+        sed 's/&amp;/\&/g' | \
+        sed 's/&lt;/</g' | \
+        sed 's/&gt;/>/g' | \
+        tr -s ' \n' | \
+        head -c 15000
+}
+
+analyze() {
+    local file="$1"
+    if [[ ! -f "$file" ]]; then
+        echo "Error: File not found: $file" >&2
+        exit 1
+    fi
+    
+    cat "$file" | ollama run --nowordwrap "$MODEL" "You are a content analyst. Summarize this article/content for someone interested in AI, agents, tools, trading, and startups.
+
+Provide:
+1. **TITLE/TOPIC**: What is this about (one line)
+2. **KEY POINTS**: 3-5 bullet points of main insights
+3. **ACTIONABLE TAKEAWAYS**: What can the reader do with this info
+4. **RELEVANCE SCORE**: 1-10 for our audience (AI builders/traders)
+5. **VERDICT**: Worth sharing? (Yes/No + why)
+
+Be concise. Skip fluff. Focus on signal."
+}
+
+digest() {
+    local url="$1"
+    if [[ -z "$url" ]]; then
+        echo "Error: URL required" >&2
+        exit 1
+    fi
+    
+    echo "Fetching: $url" >&2
+    local content=$(fetch_url "$url")
+    
+    if [[ -z "$content" ]]; then
+        echo "Error: Failed to fetch content" >&2
+        exit 1
+    fi
+    
+    echo "$content" | ollama run --nowordwrap "$MODEL" "You are a content analyst. Summarize this article/content for someone interested in AI, agents, tools, trading, and startups.
+
+Provide:
+1. **TITLE/TOPIC**: What is this about (one line)
+2. **KEY POINTS**: 3-5 bullet points of main insights
+3. **ACTIONABLE TAKEAWAYS**: What can the reader do with this info
+4. **RELEVANCE SCORE**: 1-10 for our audience (AI builders/traders)
+5. **VERDICT**: Worth sharing? (Yes/No + why)
+
+Be concise. Skip fluff. Focus on signal.
+
+Content:"
+}
+
+thread() {
+    local url="$1"
+    if [[ -z "$url" ]]; then
+        echo "Error: Thread URL required" >&2
+        exit 1
+    fi
+    
+    echo "Fetching thread: $url" >&2
+    local content=$(fetch_url "$url")
+    
+    echo "$content" | ollama run --nowordwrap "$MODEL" "This is an X/Twitter thread. Extract and summarize the key points.
+
+Provide:
+1. **AUTHOR**: Who wrote this
+2. **THREAD SUMMARY**: 2-3 sentence overview
+3. **KEY POINTS**: Main insights as bullet points
+4. **BEST QUOTE**: Most memorable/shareable line
+5. **ACTION**: Repost/Like/Ignore + why
+
+Content:"
+}
+
+# Main
+case "${1:-help}" in
+    fetch)
+        fetch_url "$2"
+        ;;
+    analyze)
+        analyze "$2"
+        ;;
+    digest)
+        digest "$2"
+        ;;
+    thread)
+        thread "$2"
+        ;;
+    help|--help|-h)
+        usage
+        ;;
+    *)
+        echo "Unknown command: $1" >&2
+        usage
+        exit 1
+        ;;
+esac
