@@ -1,0 +1,19 @@
+[
+  {
+    "id": "builder-ai-001",
+    "fact": "Startup valued at $1.5B in 2025",
+    "category": "milestone",
+    "timestamp": "2025-08-31",
+    "source": "news research",
+    "status": "active"
+  },
+  {
+    "id": "builder-ai-002",
+    "fact": "Company collapsed amid AI development claims",
+    "category": "status",
+    "timestamp": "2025-09-02",
+    "source": "news research",
+    "status": "active",
+    "supersededBy": null
+  }
+]
