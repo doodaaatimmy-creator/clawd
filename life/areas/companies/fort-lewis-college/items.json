@@ -1,0 +1,6 @@
+[
+  {"id": "flc-001", "fact": "Winn is sole IR Analyst", "category": "status", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"},
+  {"id": "flc-002", "fact": "Recently migrated to Workday", "category": "milestone", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"},
+  {"id": "flc-003", "fact": "Stipend project for comparative salary analysis upcoming", "category": "status", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"},
+  {"id": "flc-004", "fact": "Joe in HR is contact for paternity leave", "category": "relationship", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"}
+]

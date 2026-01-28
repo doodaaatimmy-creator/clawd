@@ -1,0 +1,6 @@
+[
+  {"id": "gn-001", "fact": "Priority #1 project", "category": "status", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"},
+  {"id": "gn-002", "fact": "B2B pricing model: $12k-40k/year", "category": "status", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"},
+  {"id": "gn-003", "fact": "Production infrastructure built", "category": "milestone", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"},
+  {"id": "gn-004", "fact": "Next milestone: deploy and find first customer", "category": "status", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"}
+]

@@ -1,0 +1,8 @@
+[
+  {"id": "winn-001", "fact": "IR Analyst at Fort Lewis College", "category": "status", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"},
+  {"id": "winn-002", "fact": "Wife pregnant, daughter due May 27, 2026", "category": "milestone", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"},
+  {"id": "winn-003", "fact": "12 weeks paternity leave available (state-backed)", "category": "status", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"},
+  {"id": "winn-004", "fact": "Goal: $100k+/year from side projects within 6 months", "category": "milestone", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"},
+  {"id": "winn-005", "fact": "GitHub account: WinnCook (personal)", "category": "preference", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"},
+  {"id": "winn-006", "fact": "Prefers CLI-first, AI-native tools", "category": "preference", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"}
+]

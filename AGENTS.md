@@ -33,6 +33,49 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 - This is your curated memory — the distilled essence, not raw logs
 - Over time, review your daily files and update MEMORY.md with what's worth keeping
 
+### 🧠 Three-Layer Memory System
+
+Memory is now a **living knowledge graph** that compounds automatically.
+
+**Layer 1: Knowledge Graph** (`life/areas/`)
+```
+life/areas/
+├── people/       # Person entities (winn/, joe-hr/, etc.)
+├── companies/    # Company entities (fort-lewis-college/, etc.)
+└── projects/     # Project entities (grant-nexus/, options-analyst/)
+```
+
+Each entity has:
+- `summary.md` — Weekly-rewritten snapshot (what to load for quick context)
+- `items.json` — Atomic timestamped facts (the source of truth)
+
+**Layer 2: Daily Notes** (`memory/YYYY-MM-DD.md`)
+- Raw event logs — what happened, when
+- Written continuously during conversations
+
+**Layer 3: Tacit Knowledge** (`MEMORY.md`)
+- Patterns, preferences, lessons learned
+- How Winn operates, not facts about the world
+
+**Fact Schema** (items.json):
+```json
+{
+  "id": "entity-001",
+  "fact": "The actual fact",
+  "category": "relationship|milestone|status|preference",
+  "timestamp": "YYYY-MM-DD",
+  "source": "conversation|onboarding",
+  "status": "active|superseded",
+  "supersededBy": "entity-002"
+}
+```
+
+**Rules:**
+- Save durable facts immediately to relevant entity's items.json
+- Never delete facts — mark as `superseded` with pointer to new fact
+- Weekly synthesis rewrites summary.md from active facts
+- Tiered retrieval: summary.md first, items.json for details
+
 ### 📝 Write It Down - No "Mental Notes"!
 - **Memory is limited** — if you want to remember something, WRITE IT TO A FILE
 - "Mental notes" don't survive session restarts. Files do.

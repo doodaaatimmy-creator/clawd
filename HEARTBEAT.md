@@ -19,6 +19,13 @@
 - [ ] Update MEMORY.md with significant insights
 - [ ] Prepare items for next morning brief
 
+### 🧠 Fact Extraction (every 2-3 heartbeats)
+- [ ] Scan recent conversations for durable facts about people/companies/projects
+- [ ] Write new facts to relevant `life/areas/<type>/<entity>/items.json`
+- [ ] Focus on: relationships, status changes, milestones, preferences
+- [ ] Skip: casual chat, temporary info, ephemeral details
+- [ ] If fact contradicts existing one: mark old as `superseded`, add new with `supersededBy` pointer
+
 ### 💡 Ideation
 - [ ] Capture 1 new product/feature idea based on what I learned
 - [ ] Evaluate against: Can we build it? Will it make money? Do we have edge?

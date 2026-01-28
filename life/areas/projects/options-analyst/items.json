@@ -1,0 +1,5 @@
+[
+  {"id": "oa-001", "fact": "Uses DuckDB, LanceDB, Polygon API", "category": "status", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"},
+  {"id": "oa-002", "fact": "Has MCP server ready for AI integration", "category": "milestone", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"},
+  {"id": "oa-003", "fact": "Needs real-time improvements", "category": "status", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"}
+]
