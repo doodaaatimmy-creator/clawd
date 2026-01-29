@@ -66,8 +66,63 @@ quest-boxing/
 
 ---
 
+## Session 2: 2026-01-29 (Locomotion Fix)
+
+### XRTools PlayerBody Hierarchy
+**Problem:** Locomotion wasn't working. Controllers tracked, punching worked, but joystick movement did nothing.
+
+**Root Cause:** XRToolsMovementDirect and XRToolsMovementTurn look for XRToolsPlayerBody in their parent chain using `XRHelpers.get_xr_origin()`. Our scene had:
+```
+TrainingGym
+├── XROrigin3D
+│   ├── LeftController → MovementDirect
+│   └── RightController → MovementTurn
+└── PlayerBody  ← SIBLING (can't be found!)
+```
+
+**Correct Structure:**
+```
+TrainingGym
+├── PlayerBody
+│   └── XROrigin3D  ← CHILD of PlayerBody
+│       ├── LeftController → MovementDirect
+│       └── RightController → MovementTurn
+```
+
+**How XRHelpers.get_xr_origin() works:**
+1. Try explicit path if provided
+2. Walk UP the tree looking for XROrigin3D ancestor
+3. Check ONE LEVEL of children
+
+Since PlayerBody was a sibling, the movement providers couldn't find it.
+
+### Script Path Gotcha
+**Problem:** After fixing scene hierarchy, scripts broke!
+
+**Cause:** Scripts had hardcoded paths like `$XROrigin3D/LeftController`
+
+**Fix:** Update all node paths to reflect new hierarchy:
+```gdscript
+# BEFORE (broken)
+@onready var left_controller = $XROrigin3D/LeftController
+
+# AFTER (fixed)
+@onready var left_controller = $PlayerBody/XROrigin3D/LeftController
+```
+
+**Lesson:** When restructuring scenes, ALWAYS grep for node path references in associated scripts!
+
+### Debug Strategy for VR Apps
+Since GDScript print() doesn't show in logcat by default:
+1. Add explicit debug prints in _ready()
+2. Check node existence with get_node_or_null()
+3. Print group membership counts
+4. Use visual debug (Label3D) for runtime values
+
+---
+
 ## Next: v2 Features
-- [ ] Joystick locomotion (smooth movement + snap/smooth turning)
+- [x] Joystick locomotion (smooth movement + snap/smooth turning) - FIXED!
 - [ ] Better glove models
 - [ ] Guitar Hero style combo indicators
 - [ ] Sound effects

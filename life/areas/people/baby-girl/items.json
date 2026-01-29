@@ -1,0 +1,18 @@
+[
+  {
+    "id": "baby-001",
+    "fact": "Due date: May 27, 2026",
+    "category": "milestone",
+    "timestamp": "2026-01-28",
+    "source": "onboarding",
+    "status": "active"
+  },
+  {
+    "id": "baby-002",
+    "fact": "Winn felt her kick for the first time - hand on wife's belly at 2:00 PM",
+    "category": "milestone",
+    "timestamp": "2026-01-29",
+    "source": "conversation",
+    "status": "active"
+  }
+]

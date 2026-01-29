@@ -1,0 +1,161 @@
+#!/bin/bash
+# VR QA Testing Tool for Quest Boxing
+# Monitors logs, captures state, and helps debug VR apps
+
+set -e
+
+PACKAGE="org.godotengine.xrtemplate"
+ACTIVITY="com.godot.game.GodotAppLauncher"
+
+usage() {
+    echo "🥊 VR QA Testing Tool"
+    echo ""
+    echo "Usage: vr-qa <command>"
+    echo ""
+    echo "Commands:"
+    echo "  status       Check if app is running"
+    echo "  start        Launch the app"
+    echo "  stop         Stop the app"
+    echo "  restart      Restart the app"
+    echo "  logs         Stream Godot logs (live)"
+    echo "  logs-grep    Stream logs with custom filter"
+    echo "  screenshot   Take a screenshot"
+    echo "  record       Start screen recording (5s)"
+    echo "  mirror       Mirror Quest screen via scrcpy"
+    echo "  inputs       Show controller input events"
+    echo "  test-menu    Test menu button interactions"
+    echo ""
+}
+
+check_adb() {
+    if ! adb devices | grep -q "device$"; then
+        echo "❌ No Quest device connected"
+        exit 1
+    fi
+    echo "✅ Quest connected"
+}
+
+status() {
+    check_adb
+    PID=$(adb shell pidof $PACKAGE 2>/dev/null || echo "")
+    if [ -n "$PID" ]; then
+        echo "✅ App running (PID: $PID)"
+    else
+        echo "⚪ App not running"
+    fi
+}
+
+start_app() {
+    check_adb
+    echo "🚀 Starting app..."
+    adb shell am start -n $PACKAGE/$ACTIVITY
+    sleep 2
+    status
+}
+
+stop_app() {
+    check_adb
+    echo "🛑 Stopping app..."
+    adb shell am force-stop $PACKAGE
+}
+
+restart_app() {
+    stop_app
+    sleep 1
+    start_app
+}
+
+stream_logs() {
+    check_adb
+    echo "📝 Streaming Godot logs (Ctrl+C to stop)..."
+    adb logcat -c  # Clear old logs
+    adb logcat | grep -iE "(godot|$PACKAGE|Main Menu|Training|Active|CLICKED|Hover|button)"
+}
+
+stream_logs_grep() {
+    check_adb
+    FILTER="${1:-godot}"
+    echo "📝 Streaming logs with filter: $FILTER"
+    adb logcat -c
+    adb logcat | grep -iE "$FILTER"
+}
+
+take_screenshot() {
+    check_adb
+    TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+    FILENAME="vr_screenshot_$TIMESTAMP.png"
+    echo "📸 Taking screenshot..."
+    adb shell screencap -p /sdcard/$FILENAME
+    adb pull /sdcard/$FILENAME .
+    adb shell rm /sdcard/$FILENAME
+    echo "✅ Saved: $FILENAME"
+}
+
+record_screen() {
+    check_adb
+    DURATION="${1:-5}"
+    TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+    FILENAME="vr_recording_$TIMESTAMP.mp4"
+    echo "🎥 Recording for $DURATION seconds..."
+    adb shell screenrecord --time-limit $DURATION /sdcard/$FILENAME
+    adb pull /sdcard/$FILENAME .
+    adb shell rm /sdcard/$FILENAME
+    echo "✅ Saved: $FILENAME"
+}
+
+mirror_screen() {
+    check_adb
+    if ! command -v scrcpy &> /dev/null; then
+        echo "❌ scrcpy not installed. Install with: brew install scrcpy"
+        exit 1
+    fi
+    echo "🪞 Starting screen mirror..."
+    scrcpy --crop 1920:1080:0:0 --max-size 1280
+}
+
+show_inputs() {
+    check_adb
+    echo "🎮 Showing controller inputs (Ctrl+C to stop)..."
+    adb shell getevent -l | grep -E "(BTN|ABS)"
+}
+
+test_menu() {
+    check_adb
+    echo "🧪 Testing menu interactions..."
+    
+    # Restart app fresh
+    echo "  → Restarting app..."
+    adb shell am force-stop $PACKAGE
+    sleep 1
+    adb shell am start -n $PACKAGE/$ACTIVITY
+    sleep 3
+    
+    # Clear logs and start monitoring
+    adb logcat -c
+    
+    echo "  → Monitoring for 10 seconds..."
+    echo "  → (Put on headset and try selecting menu items)"
+    echo ""
+    
+    # Capture logs for 10 seconds
+    timeout 10 adb logcat | grep -iE "(CLICKED|Hover|button|Training|Active|pointer|raycast)" || true
+    
+    echo ""
+    echo "✅ Test complete. Check output above for interactions."
+}
+
+# Main
+case "${1:-help}" in
+    status)     status ;;
+    start)      start_app ;;
+    stop)       stop_app ;;
+    restart)    restart_app ;;
+    logs)       stream_logs ;;
+    logs-grep)  stream_logs_grep "$2" ;;
+    screenshot) take_screenshot ;;
+    record)     record_screen "$2" ;;
+    mirror)     mirror_screen ;;
+    inputs)     show_inputs ;;
+    test-menu)  test_menu ;;
+    *)          usage ;;
+esac

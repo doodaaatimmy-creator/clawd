@@ -160,6 +160,9 @@ UI = verification layer. AI agents = primary operators.
 - **May 27, 2026**: Daughter due date
 - **Contact Joe @ HR**: Arrange paternity leave (12 weeks)
 
+### 🍼 Baby Milestones
+- **2026-01-29 @ 2:00 PM**: Winn felt daughter kick for the first time! Hand on wife's belly. 🥹💕
+
 ---
 
 ## 💡 Ideas to Explore
