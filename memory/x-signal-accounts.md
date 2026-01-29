@@ -11,6 +11,8 @@ Only accounts where EVERY post is potential signal. Max 2-3.
 | Handle | Domain | Why | Added | Last Value |
 |--------|--------|-----|-------|------------|
 | @JimBeau767 | Signal | Winn's main account - direct signal pipeline | 2026-01-27 | 2026-01-29 |
+| @bcherny | Claude Code | Built Claude Code. Cutting edge AI tooling | 2026-01-29 | — |
+| @steipete | Moltbot | Peter Steinberger. Built Moltbot/Clawdbot. Our entire stack | 2026-01-29 | — |
 
 ---
 
