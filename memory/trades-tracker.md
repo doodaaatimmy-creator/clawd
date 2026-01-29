@@ -17,16 +17,62 @@
 | **Entry** | $3.55/share ($355 total) |
 | **AMD Price at Entry** | ~$255.69 |
 | **OTM %** | 37% |
-| **Thesis** | AI GPU demand acceleration, OpenAI chip deal, Meta capex tailwind |
-| **Catalysts** | Feb 3 earnings, Helios ramp, tariff resolution |
-| **Target** | UBS $330, but playing for overshoot |
-| **Bull Case Value** | $10-20+ (3-5x) |
 | **Status** | 🟢 OPEN |
+
+---
+
+#### 📝 Entry Rationale (documented at open)
+
+**Why AMD over other candidates:**
+1. **IV Rank: 11.7%** — Options historically cheap (vs NVDA at 73%)
+2. **Negative gamma regime** — Dealers short gamma, moves get amplified
+3. **Imminent catalyst** — Earnings Feb 3 (before momentum fades)
+4. **Analyst conviction** — UBS $330, Piper Sandler $300 (raised ahead of earnings)
+
+**The Thesis:**
+AMD is the second-mover advantage play in AI compute. While everyone obsesses over NVDA (expensive options), AMD is quietly:
+- Landing OpenAI chip deals — validation as legitimate #2
+- Projecting $14-15B AI GPU revenue in 2026 — 2x YoY growth
+- Benefiting from Meta's $115-135B capex — not all going to Nvidia
+- Helios chip ramp creating new growth vector
+
+**Market Context at Entry:**
+- Software sector selloff (IGV -5%, bear market territory)
+- Microsoft -10% on cloud growth slowdown
+- AI disruption fears creating indiscriminate selling
+- Fed held rates, no hawkish surprise
+- Tariffs in 30-day pause (negotiation theater)
+- **Contrarian entry**: Fear in tech = opportunity in quality names
+
+**Why $350 Strike (vs recommended $320):**
+- Winn chose higher risk/higher reward
+- If AMD hits UBS target ($330), $350c still has value from IV expansion + time
+- If AMD overshoots to $380+, this is a 10-bagger
+- Defined risk: max loss = $355 premium
+
+**Catalyst Stack:**
+1. **Feb 3** — Q4 earnings (AI GPU revenue update)
+2. **Feb-Mar** — Helios chip ramp, MI300 successor details
+3. **Ongoing** — Meta/Microsoft/OpenAI spending = demand tailwind
+4. **March 4** — Tariff deadline (resolution = tech pump)
+
+**Key Levels:**
+- $280 — Analyst consensus target
+- $300 — Piper Sandler target
+- $330 — UBS target
+- $353.55 — Break-even at expiry
+
+**Risk Factors Identified:**
+- Earnings miss or weak guidance
+- Tariffs actually implemented (March 4)
+- Broader tech selloff continues
+- NVDA announces something that steals narrative
+
+---
 
 **Notes:**
 - Riskier strike than recommended $320, but higher asymmetry if it hits
-- Key levels to watch: $280 (analyst consensus), $300 (Piper target), $330 (UBS)
-- Break-even at expiry: $353.55
+- This is a speculation play — sized appropriately (small % of portfolio)
 
 ---
 
