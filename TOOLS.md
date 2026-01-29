@@ -52,4 +52,43 @@ This happens when Chrome tabs have been idle too long or the relay connection hi
 
 ---
 
+## Local LLM Token Optimization Pattern
+
+**Available Models:**
+- `qwen3:4b` — Fast, good reasoning, 4B params (DEFAULT)
+- `llama3.2` — Solid all-rounder, 3.2B params
+
+**When to Use Local:**
+| Task | Use Local | Use Claude |
+|------|-----------|------------|
+| Summarizing files/logs | ✅ | ❌ |
+| Pattern detection | ✅ | ❌ |
+| Initial brainstorming | ✅ | ❌ |
+| Scoring/ranking | ✅ | ❌ |
+| Data analysis | ✅ | ❌ |
+| Draft generation | ✅ | ❌ |
+| Strategic depth | ❌ | ✅ |
+| Final delivery/decisions | ❌ | ✅ |
+| Complex multi-step reasoning | ❌ | ✅ |
+
+**Standard Pattern:**
+```bash
+# Pipe data → local analysis
+cat file.md | ollama run qwen3:4b 'Your prompt here'
+
+# Or with thinking (slower but better)
+cat file.md | ollama run qwen3:4b --verbose 'Think step by step: ...'
+```
+
+**Cron Jobs Using Local LLM:**
+- Daily self-assessment (11 PM)
+- Evening ideation (8 PM)
+- Options signal review (2:30 PM weekdays)
+- Weekly self-review synthesis (Sun 8 AM)
+- Monthly X account reassess (1st of month)
+
+**Rule:** Local does the heavy lifting. Claude delivers the final product.
+
+---
+
 Add whatever helps you do your job. This is your cheat sheet.
