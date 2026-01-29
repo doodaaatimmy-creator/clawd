@@ -54,6 +54,17 @@ UI = verification layer. AI agents = primary operators.
 - Production-ready system
 - Automate and deliver
 
+### 5. Dub & Donny Operating System
+- **Master doc:** `life/OPERATING-SYSTEM.md`
+- **Health:** Foot protocol + fitness protocol + supplements (all phased)
+- **Daily rhythm:** Morning brief → deep work → midday reset → afternoon push → wind-down → sleep
+- **Auto-reminders:** 20+ cron jobs covering supplements, fitness, hydration, wind-down, idea capture
+- **Research network:** Reddit (u/Ok_Flounder_438) + X (@ClawdChad) — browser scanning, local LLM summaries
+- **Briefs:** Morning (6:15 AM) + Afternoon (3 PM) with research highlights
+- **Weekly:** Sunday 10 AM comprehensive review (health + life + relationships)
+- **Paternity countdown:** May 27, 2026 (~118 days as of Jan 29)
+- **Timeline:** Phase 1 foundation (Jan-Feb) → Phase 2 optimization (Mar-Apr) → Phase 3 beast mode (May+)
+
 ---
 
 ## 🛠️ Infrastructure

@@ -4,5 +4,8 @@
   {"id": "winn-003", "fact": "12 weeks paternity leave available (state-backed)", "category": "status", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"},
   {"id": "winn-004", "fact": "Goal: $100k+/year from side projects within 6 months", "category": "milestone", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"},
   {"id": "winn-005", "fact": "GitHub account: WinnCook (personal)", "category": "preference", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"},
-  {"id": "winn-006", "fact": "Prefers CLI-first, AI-native tools", "category": "preference", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"}
+  {"id": "winn-006", "fact": "Prefers CLI-first, AI-native tools", "category": "preference", "timestamp": "2026-01-28", "source": "onboarding", "status": "active"},
+  {"id": "winn-007", "fact": "Age 36, 155 lbs, 5'9\" - healthy male", "category": "status", "timestamp": "2026-01-29", "source": "conversation", "status": "active"},
+  {"id": "winn-008", "fact": "Has tailor's bunion (left foot pinky) and hallux valgus with crossover toe - chronic 15 years", "category": "status", "timestamp": "2026-01-29", "source": "conversation", "status": "active"},
+  {"id": "winn-009", "fact": "Takes supplements: Omega-3, CoQ10, K2, L-Carnitine, Cod Liver Oil, Zinc, Magnesium Glycinate, L-Theanine", "category": "preference", "timestamp": "2026-01-29", "source": "conversation", "status": "active"}
 ]

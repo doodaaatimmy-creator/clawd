@@ -2,6 +2,26 @@
 
 ## On Each Heartbeat, Rotate Through:
 
+### 🌅 Morning Brief (FIRST heartbeat of day, ~6-7 AM MT)
+- [ ] **Research scan** (use local LLM for summaries):
+  - Open Reddit via browser → check subscribed subs feed
+  - Open X (@ClawdChad) via browser → check feed
+  - Extract top 3-5 valuable findings
+  - Summarize with `ollama run qwen3:4b` to save tokens
+  - Log raw findings to `memory/research/YYYY-MM-DD.md`
+- [ ] Check weather for Durango
+- [ ] Read `life/health/foot-protocol.md` — current phase
+- [ ] Read `life/health/fitness-protocol.md` — today's workout
+- [ ] Check Discord for overnight idea captures from Winn
+- [ ] Calculate paternity countdown (days until May 27)
+- [ ] Compile brief and send to Discord:
+  - 🔬 Research highlights (2-3 bullets)
+  - 🌤️ Weather snapshot
+  - 💪 Health/fitness tasks
+  - 🎯 Top priority reminder
+  - 🍼 Paternity countdown
+- [ ] Keep it tight — scannable, not a novel
+
 ### 📬 Check Inbound (EVERY heartbeat)
 - [ ] **Discord** — Check #clawdchad-signals for messages FROM Winn (not just broadcast TO it)
 - [ ] Respond to any missed messages before doing other tasks
