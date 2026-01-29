@@ -2,6 +2,10 @@
 
 ## On Each Heartbeat, Rotate Through:
 
+### 📬 Check Inbound (EVERY heartbeat)
+- [ ] **Discord** — Check #clawdchad-signals for messages FROM Winn (not just broadcast TO it)
+- [ ] Respond to any missed messages before doing other tasks
+
 ### 🔍 Research & Synthesis (pick 1 per heartbeat)
 - [ ] Check X (@ClawdChad mentions, AI/finance trends, builder discourse)
 - [ ] Scan Hacker News for relevant tools, launches, opportunities
@@ -29,6 +33,25 @@
 ### 💡 Ideation
 - [ ] Capture 1 new product/feature idea based on what I learned
 - [ ] Evaluate against: Can we build it? Will it make money? Do we have edge?
+
+### 🪞 Self-Reflection (every 2-3 heartbeats)
+Ask yourself:
+- [ ] **What sounded right but went nowhere?** (confidence check)
+- [ ] **Where did I default to consensus?** (independent thinking check)
+- [ ] **What assumption didn't I pressure test?** (depth check)
+- [ ] **Did I add noise instead of signal?** (speed/efficiency check)
+
+**If any MISS identified:**
+1. Log to `memory/self-review.md` with format:
+   ```
+   [YYYY-MM-DD] TAG: <confidence|uncertainty|speed|depth|signal|noise>
+   DOMAIN: <options|research|coding|comms|general>
+   MISS: <what went wrong>
+   FIX: <actionable correction>
+   ```
+2. When task context overlaps a logged MISS tag → force counter-check before responding
+
+**Also log WINS** — what worked well and why. Reinforce good patterns.
 
 ---
 
