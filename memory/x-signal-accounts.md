@@ -6,19 +6,23 @@
 
 ## Tier 1: Notifications ON (Interrupt-worthy)
 
-Only accounts where EVERY post is potential signal. Max 2-3.
+Reserved for extreme cases only. Currently: NONE.
+All accounts moved to Tier 2 (batch scan) for token efficiency.
 
-| Handle | Domain | Why | Added | Last Value |
-|--------|--------|-----|-------|------------|
-| @JimBeau767 | Signal | Winn's main account - direct signal pipeline | 2026-01-27 | 2026-01-29 |
-| @bcherny | Claude Code | Built Claude Code. Cutting edge AI tooling | 2026-01-29 | — |
-| @steipete | Moltbot | Peter Steinberger. Built Moltbot/Clawdbot. Our entire stack | 2026-01-29 | — |
+*Discuss frequency tuning: end of day 2026-01-29*
 
 ---
 
 ## Tier 2: Heartbeat List Scan (High-Value Batch)
 
 Check these on heartbeat rotation. Extract insights, don't just read.
+
+### 🔥 Priority (Our Stack + Winn's Signal)
+| Handle | Domain | Why | Value Score | Last Checked |
+|--------|--------|-----|-------------|--------------|
+| @JimBeau767 | Signal | Winn's main account - direct signal pipeline | 5 | 2026-01-29 |
+| @bcherny | Claude Code | Built Claude Code. Cutting edge AI tooling | — | — |
+| @steipete | Moltbot | Peter Steinberger. Built Moltbot/Clawdbot | — | — |
 
 ### AI/Tech Builders
 | Handle | Domain | Why | Value Score | Last Checked |
@@ -87,8 +91,9 @@ When scanning, log valuable posts to `memory/x-insights/YYYY-MM-DD.md`:
 
 ## Stats
 
-- **Total Tier 1:** 1
-- **Total Tier 2:** 9
+- **Total Tier 1:** 0 (all batch scan)
+- **Total Tier 2:** 12 (3 priority + 4 AI + 3 options + 2 ecosystem)
 - **Total Tier 3:** 3
 - **Last full reassessment:** —
 - **Next reassessment:** 2026-02-28
+- **Frequency discussion:** End of day 2026-01-29
