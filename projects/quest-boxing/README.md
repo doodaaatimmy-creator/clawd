@@ -1,158 +1,142 @@
-# Quest Boxing 🥊
-## Open-Source VR Boxing & Workout Game for Meta Quest
+# 🥊 Knockout Boxing VR
 
-**Started:** January 29, 2026
-**Status:** Research & Setup
-**Platform:** Meta Quest 3 (sideload first, Quest Store later)
-**Engine:** Godot 4 + Meta Toolkit
+A full-featured VR boxing game for Meta Quest, built with Godot 4.6.
 
----
+## Features
 
-## Vision
+### 🏠 Main Menu
+- Epic mystical floating platform environment
+- Glowing orbs and pillars
+- Point-and-click VR menu interaction
+- Two game modes available
 
-A VR boxing game that:
-1. Gives you a killer workout
-2. Tracks your performance (punches, calories, intensity)
-3. Syncs data with Donny for fitness protocol adjustments
-4. Is FUN — not just exercise
+### 🏋️ Training Mode (Gym)
+- **Heavy Punching Bag**
+  - Realistic physics (spring + damping)
+  - Swing response based on punch power
+  - Visual flash feedback on hit
+  - Haptic feedback
+  
+- **Speed Bag**
+  - Fast rhythm-based hitting
+  - Streak tracking
+  - Angular velocity simulation
+  
+- **Stats Display**
+  - Session time
+  - Total hits (heavy + speed)
+  - Current streak
+  - Max punch speed (m/s)
 
----
+### ⚡ Active Mode (Rhythm Boxing)
+- **Portal System**
+  - Glowing blue portals spawn around player (360°)
+  - Portals rotate every 8 targets (forces player to turn)
+  - Smooth portal open/close animations
+  
+- **Target Types**
+  | Target | Color | Hand | Action |
+  |--------|-------|------|--------|
+  | Left Jab | 🔴 Red | Left | Punch |
+  | Right Jab | 🔵 Blue | Right | Punch |
+  | Left Hook | 🟠 Orange | Left | Punch |
+  | Right Hook | 🩵 Cyan | Right | Punch |
+  | Uppercut | 🟣 Purple | Either | Punch |
+  | Duck Bar | 🟡 Yellow | - | Duck under |
 
-## Why This Will Win
+- **Scoring System**
+  - PERFECT: ≤50ms timing = 100 pts
+  - GREAT: ≤100ms timing = 75 pts
+  - GOOD: ≤200ms timing = 50 pts
+  - Combo multiplier up to 3x
+  
+- **Wave System**
+  - Difficulty increases each wave
+  - Faster targets, more complex patterns
+  - More duck bars at higher waves
 
-- **Fitness VR is HOT** — Supernatural, FitXR, Thrill of the Fight all crushing it
-- **Open source gap** — No good FOSS boxing games exist
-- **Godot-Meta partnership** — Fresh momentum, official support
-- **We have the hardware** — Quest + M4 Mac
-- **Data flywheel** — Workout data feeds back to our health system
-- **Monetization path** — Quest Store, Patreon, or premium features
+- **Epic Environment**
+  - Mountain top floating arena
+  - Procedural clouds and distant peaks
+  - HDR skybox support (sunrise/sunset)
+  - Atmospheric fog effects
 
----
+### 🎮 Controls
+- **Left Stick**: Move (forward/back/strafe)
+- **Right Stick**: Smooth turn
+- **Punch**: Swing controller at targets
+- **Duck**: Lower your head below the yellow bar
+- **Trigger**: Select menu items
 
-## Tech Stack
+### 🔊 Audio
+- Real punch impact sounds (5 variations)
+- Whoosh/miss sounds
+- Boxing bell
+- Pop effects for balloon hits
+- Procedural UI sounds
 
-| Component | Tool |
-|-----------|------|
-| Engine | Godot 4.3+ |
-| VR Framework | Godot XR Tools + Meta Toolkit |
-| VR Standard | OpenXR |
-| Language | GDScript |
-| 3D Modeling | Blender (if needed) |
-| Audio | Godot built-in |
+### 🎨 Visual Effects
+- Impact particles on hits
+- Material flash feedback
+- Glowing portal effects
+- Combo/score UI
 
----
+## Technical Details
 
-## Phase 1: Setup & Hello VR (Week 1)
+### Built With
+- Godot 4.6
+- godot-xr-tools (MIT)
+- OpenXR
 
-- [ ] Enable Developer Mode on Quest
-- [ ] Install Godot 4 on Mac
-- [ ] Install Godot Meta Toolkit
-- [ ] Deploy "Hello VR World" to Quest
-- [ ] Verify hand tracking works
-- [ ] Document the pipeline
-
-## Phase 2: Punch Detection (Week 2-3)
-
-- [ ] Implement hand/controller tracking
-- [ ] Detect punch velocity and direction
-- [ ] Create target system (pads/bags)
-- [ ] Score hits based on accuracy + power
-- [ ] Basic haptic feedback
-
-## Phase 3: Workout Mode (Week 4-5)
-
-- [ ] Timed rounds (3 min rounds, 1 min rest)
-- [ ] Combo sequences to follow
-- [ ] Calorie estimation
-- [ ] Session summary stats
-- [ ] Export workout data to file
-
-## Phase 4: Polish & Donny Integration (Week 6-8)
-
-- [ ] Workout data → JSON export
-- [ ] Donny reads workout logs
-- [ ] Adjusts fitness protocol based on VR sessions
-- [ ] Add music/rhythm elements
-- [ ] Multiple difficulty levels
-
-## Phase 5: Release (Week 9+)
-
-- [ ] App Lab submission (easier than Quest Store)
-- [ ] Open source the code (GitHub)
-- [ ] Community feedback
-- [ ] Iterate
-
----
-
-## Health Data Flow
-
+### Project Structure
 ```
-[Quest Boxing Session]
-        ↓
-[Workout Data: punches, duration, intensity, calories]
-        ↓
-[Export to ~/clawd/health/workouts/YYYY-MM-DD-boxing.json]
-        ↓
-[Donny reads during morning brief]
-        ↓
-[Adjusts fitness protocol: "Great VR session yesterday, lighter workout today"]
-```
-
----
-
-## Resources
-
-### Official Docs
-- [Godot XR Documentation](https://docs.godotengine.org/en/stable/tutorials/xr/index.html)
-- [Meta Quest Developer](https://developers.meta.com/horizon/)
-- [Godot Meta Toolkit](https://w4games.com) (W4 Games)
-
-### Learning
-- [ ] Godot basics tutorial
-- [ ] Godot XR starter project
-- [ ] Study "Thrill of the Fight" mechanics
-
-### Inspiration
-- Thrill of the Fight (realistic boxing)
-- FitXR (rhythm + boxing)
-- Supernatural (guided workouts)
-- BoxVR (workout focused)
-
----
-
-## File Structure
-
-```
-projects/quest-boxing/
-├── README.md (this file)
-├── docs/
-│   ├── setup-guide.md
-│   └── architecture.md
-├── godot/
-│   └── (Godot project goes here)
-├── exports/
-│   └── (APK builds)
-└── research/
-    └── (reference materials)
+godot/
+├── game/
+│   ├── main_menu/     # Start menu
+│   ├── training/      # Training gym scene
+│   ├── active/        # Rhythm boxing arena
+│   ├── autoload/      # Singletons (GameManager, AudioManager)
+│   └── boxing/        # Legacy v1/v2 scenes
+├── assets/
+│   ├── audio/sfx/     # Sound effects (.wav)
+│   └── textures/      # Skybox HDRIs
+└── addons/
+    └── godot-xr-tools/ # XR utilities
 ```
 
+### Performance
+- Targets 72-90 FPS on Quest 2/3
+- Max ~50 dynamic targets
+- Efficient particle systems
+- Compatible renderer (gl_compatibility)
+
+## Building
+
+```bash
+# Export for Quest
+cd godot
+/Applications/Godot.app/Contents/MacOS/Godot --headless --export-debug "Meta Quest" ../build/boxing.apk
+
+# Install
+adb install -r ../build/boxing.apk
+
+# Launch
+adb shell am start -n org.godotengine.xrtemplate/com.godot.game.GodotAppLauncher
+```
+
+## Credits
+- Punch sounds: qubodup (CC0) - OpenGameArt.org
+- XR Tools: Bastiaan Olij, Malcolm Nixon (MIT)
+
+## TODO
+- [ ] Music tracks (BPM-synced)
+- [ ] Announcer voice lines
+- [ ] Workout stats/calories
+- [ ] Difficulty selection
+- [ ] High score persistence
+- [ ] Better glove models
+- [ ] Hand tracking support
+
 ---
 
-## Success Metrics
-
-**Week 2:** Hand tracking working, can detect punch
-**Week 4:** Playable workout session
-**Week 8:** Donny integration working
-**Week 12:** App Lab submission ready
-
----
-
-## Notes
-
-- Start SIMPLE — one bag, one punch type, one round
-- Iterate fast — test on Quest frequently
-- Fun > Features — if it's not fun, nobody uses it
-
----
-
-*Let's build something that makes us healthier AND makes money.*
+*Built by Donny 🦾 for Winn*
