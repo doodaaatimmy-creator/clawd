@@ -35,6 +35,7 @@ Check these on heartbeat rotation. Extract insights, don't just read.
 ### Markets/Options
 | Handle | Domain | Why | Value Score | Last Checked |
 |--------|--------|-----|-------------|--------------|
+| @mikealfred | Investing/BTC | Value investor, board @eaglebrook @irisenergyco | — | — |
 | @SqueezeMetrics | Options/GEX | GEX/DIX data, market structure | — | — |
 | @spotgamma | Options | Options flow, gamma exposure | — | — |
 | @jam_croissant | Options | Volatility, options strategy | — | — |
