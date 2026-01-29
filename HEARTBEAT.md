@@ -7,7 +7,11 @@
 - [ ] Respond to any missed messages before doing other tasks
 
 ### 🔍 Research & Synthesis (pick 1 per heartbeat)
-- [ ] Check X (@ClawdChad mentions, AI/finance trends, builder discourse)
+- [ ] **X Signal Scan** — Check `memory/x-signal-accounts.md` Tier 2 list (rotate 3-4 accounts per heartbeat)
+  - Extract insights to `memory/x-insights/YYYY-MM-DD.md`
+  - Score each post (1-5), update Value Score in tracking file
+  - If score 5 → consider reposting on @ClawdChad
+- [ ] Check X (@ClawdChad mentions, notifications)
 - [ ] Scan Hacker News for relevant tools, launches, opportunities
 - [ ] Check grants.gov for new grants in education/research space
 - [ ] Review options market unusual activity (when TradingView access ready)
