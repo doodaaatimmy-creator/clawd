@@ -33,4 +33,23 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 ---
 
+## Browser Relay (Chrome)
+
+### Troubleshooting: "tab not found" errors
+
+When browser actions fail with "tab not found" but `tabs` still lists them:
+1. The CDP websocket connections are stale (tabs exist but aren't responding)
+2. **Recovery steps:**
+   - `close` action still works on stale tabs
+   - Close all orphaned tabs
+   - `open` a fresh tab to the target URL
+   - Proceed with snapshot/act
+
+**Don't:** Keep retrying the same broken connection
+**Do:** Close stale tabs → open fresh → continue
+
+This happens when Chrome tabs have been idle too long or the relay connection hiccupped.
+
+---
+
 Add whatever helps you do your job. This is your cheat sheet.

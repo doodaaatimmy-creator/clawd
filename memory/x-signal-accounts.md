@@ -98,3 +98,4 @@ When scanning, log valuable posts to `memory/x-insights/YYYY-MM-DD.md`:
 - **Last full reassessment:** —
 - **Next reassessment:** 2026-02-28
 - **Frequency discussion:** End of day 2026-01-29
+- **Comms architecture discussion:** End of day 2026-01-29

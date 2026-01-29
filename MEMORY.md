@@ -76,6 +76,14 @@ UI = verification layer. AI agents = primary operators.
 - Codex CLI: v0.92.0
 - Chezmoi: v2.69.3 (syncing ~/.claude/)
 
+### Token-Efficient CLI Tools (Built 2026-01-29)
+- `options-signals` — Only actionable setups
+- `options-brief` — One-line market summary  
+- `options-scan` — Condensed ticker table
+- `x-scout` — Local LLM feed analysis
+- `research-scout` — last30days + local synthesis
+- `dashboard` — Morning briefing CLI
+
 ---
 
 ## 🧠 Learnings
@@ -100,9 +108,12 @@ UI = verification layer. AI agents = primary operators.
 
 ## 📢 Communication Preferences
 
-- **ALWAYS mirror updates to Discord** — Any time I update Winn on webchat, also ping Discord (#clawdchad-signals: 1465754027789652150)
-- **Discord is primary** — Winn checks Discord more than webchat
-- **Keep it brief on Discord** — Summaries, not walls of text
+- **Discord channel is PRIMARY** — Respond there, not webchat, when working async
+- **NO DUPLICATE RESPONSES** — Pick ONE channel per interaction
+- **When Winn messages in Discord → respond ONLY in Discord**
+- **When Winn messages in webchat → respond ONLY in webchat**
+- **Keep it brief** — Summaries, not walls of text
+- **Channel ID:** #clawdchad-signals = 1465754027789652150
 
 ## 🔒 X Account Rules (@ClawdChad) — CRITICAL
 

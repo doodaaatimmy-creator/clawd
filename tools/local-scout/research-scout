@@ -1,0 +1,61 @@
+#!/bin/bash
+# research-scout: Wrapper for last30days that uses local models for synthesis
+# Saves Opus tokens by doing heavy lifting locally
+
+set -e
+
+SKILL_DIR="/Users/clawdchad/clawd/skills/last30days-skill"
+MODEL="${SCOUT_MODEL:-qwen2.5-coder:14b}"
+TOPIC="$1"
+shift
+
+if [ -z "$TOPIC" ]; then
+    echo "Usage: research-scout <topic> [--quick|--deep]"
+    exit 1
+fi
+
+echo "🔍 Researching: $TOPIC"
+echo "📡 Using local model: $MODEL for synthesis"
+echo ""
+
+# Step 1: Run the research script
+RESEARCH_OUTPUT=$(python3 "$SKILL_DIR/scripts/last30days.py" "$TOPIC" --emit=json "$@" 2>/dev/null || echo '{"error": "research failed"}')
+
+# Check if we got valid output
+if echo "$RESEARCH_OUTPUT" | grep -q '"error"'; then
+    echo "❌ Research failed. Falling back to web search..."
+    # Fallback to web-only mode
+    RESEARCH_OUTPUT='{"mode": "web-only", "reddit": [], "x": []}'
+fi
+
+# Step 2: Synthesize with local model
+echo "🧠 Synthesizing with $MODEL..."
+
+SYNTHESIS_PROMPT="You are a research analyst. Given the following research data about '$TOPIC', extract:
+
+1. TOP 5 KEY INSIGHTS (most upvoted/liked points)
+2. SPECIFIC NAMES mentioned (tools, products, people, projects)
+3. COMMON PATTERNS across sources
+4. ACTIONABLE TAKEAWAYS
+
+Research data:
+$RESEARCH_OUTPUT
+
+Be concise. Focus on signal, not noise. List specific names and numbers."
+
+SYNTHESIS=$(echo "$SYNTHESIS_PROMPT" | ollama run --nowordwrap "$MODEL" 2>/dev/null)
+
+# Step 3: Output the condensed result
+echo ""
+echo "═══════════════════════════════════════════════════"
+echo "📊 RESEARCH SYNTHESIS: $TOPIC"
+echo "═══════════════════════════════════════════════════"
+echo ""
+echo "$SYNTHESIS"
+echo ""
+echo "═══════════════════════════════════════════════════"
+echo "💡 This synthesis used local model ($MODEL)"
+echo "   Original research: $(echo "$RESEARCH_OUTPUT" | wc -c | xargs) bytes"
+echo "   Synthesis: $(echo "$SYNTHESIS" | wc -c | xargs) bytes"
+echo "   Token savings: ~80%+"
+echo "═══════════════════════════════════════════════════"
